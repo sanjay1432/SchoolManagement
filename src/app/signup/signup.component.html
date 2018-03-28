@@ -1,0 +1,31 @@
+
+<div *ngIf="!signuporin"><button mat-button color="primary" (click) = "signInWithGoogle()">Google</button>
+  <button mat-button color="accent" (click) = "signInWithFB()">Facebook</button>
+  <button mat-button color="accent" (click) = "signOut()">Signout</button>
+  <img src="{{user?user.photoUrl:''}}">
+<div>
+  <h4>{{ user?user.name:'' }}</h4>
+  <p>{{ user?user.email:'' }}</p>
+</div>
+
+
+<h5>Or use your password to <a (click)='onSignup()' id="signup">sign up</a> or <a (click)='onSignin()' id="signin">sign in</a></h5>
+</div>
+
+<div *ngIf="signuporin">
+  {{signType}}
+<form class="example-form" #signup="ngForm" (ngSubmit)="signType!='Signup'?onSignin(signup):onSignup(signup)">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" name="email" ngModel required #email="ngModel">
+
+    </mat-form-field>
+    <br/>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Password" name="password" type="password" ngModel required #password="ngModel">
+    </mat-form-field>
+    <h5 style="color:red">{{error}}</h5>
+    <div class="buttonHolder">
+      <button mat-raised-button color="warn">{{signType}}</button>
+    </div>
+  </form>
+</div>
